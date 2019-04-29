@@ -1,0 +1,79 @@
+<!-- <div class = 'myclass'>
+  <div *ngFor="let c of myclasses" (click) ="getMyClass(c)">{{c.id}} - {{c.name}}</div>
+</div> -->
+<button (click)="generate()">Generate to Java code</button>
+<form>
+  <div [formGroup]="form" class = "mainForm">
+    
+    <div class = "className">
+      <input type="text" placeholder="Class name" formControlName="name" id = "classInput">
+    </div>
+
+    <div class = "classFields" formArrayName="fields">
+      <p>Fields</p>
+      <div *ngFor="let control of form.get('fields').controls; index as i" [formGroupName]="i">
+        
+        <ul id="listFields">
+          
+          <li class = "todoField" >
+            <select formControlName="myIdentifier">
+              <option [value]="'public'">+</option>
+              <option [value]="'private'">-</option>
+              <option [value]="'protected'">#</option>
+            </select>
+            
+            <select formControlName="fieldType">
+              <option [value]="'int'">int</option>
+              <option [value]="'bool'">bool</option>
+              <option [value]="'String'">string</option>
+            </select>
+            
+            <input type="text" placeholder="Field Name" formControlName="name" id = "fieldInput">
+            <button>-</button><br>
+          
+          </li>
+        </ul>
+      </div>
+      
+      <button type="button" (click)="addProps()">Add Field</button>
+    </div>
+
+    <div class = "classMethods" formArrayName="methods">
+      <p>Methods</p>
+      <div *ngFor="let control of form.get('methods').controls; index as i" [formGroupName]="i">
+
+        <ul id="listMethods">
+          <li>
+              <select formControlName="methodIdentifier">
+                <option [value]="'public'">+</option>
+                <option [value]="'private'">-</option>
+                <option [value]="'protected'">#</option>
+              </select>
+              
+              <select formControlName="methodType">
+                <option [value]="'int'">int</option>
+                <option [value]="'bool'">bool</option>
+                <option [value]="'String'">string</option>
+                <option [value]="'void'">void</option>
+              </select>
+            
+            <input type="text" placeholder="Method Name" formControlName="name" id = "methodInput">
+            <br><br>
+            <!-- <input type="text" placeholder="inputName" formControlName="name" id = "listInput"><button>NewInput</button><br><br> -->
+          </li>
+        </ul>
+      </div>
+      
+      <button type="button" (click)="addMethods();">Add Method</button> 
+      <button> DeleteLast</button>
+    </div>
+    <button (click)="save()">Save</button>
+    <a routerLink = "/main"><button>Create new class</button></a>
+
+    
+  </div>
+</form>
+
+
+
+
