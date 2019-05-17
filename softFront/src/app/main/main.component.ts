@@ -12,12 +12,21 @@ import { ActivatedRoute } from '@angular/router';
 export class MainComponent implements OnInit {
 
   public projects:MyProject[] = [];
-  public myclasses:MyClass[] = [];
+  public classList:MyClass[] = [];
 
   public name: any = '';
   projectId = '';
+  public showed: boolean = false;
+
+  public parent: number;
+  public child: number;
   
   private form: FormGroup;
+
+  public s_class: string;
+  public s_parent: string;
+  public s_fields: MyField[] = [];
+  public s_methods: MyMethod[] = [];
   
   constructor(
     private provider:ProviderService, 
@@ -33,12 +42,19 @@ export class MainComponent implements OnInit {
     return this.form.get('methods') as FormArray;
   }
 
+  
+
   ngOnInit() {
     // this.route.data.pipe(
     //   map(data=> {
     //     this.projectId = data[]
     //   })
     // )
+
+    this.provider.getListOfClass().then(x=>{
+      this.classList = x;
+    })
+     
     this.form = this.fb.group({
       name: [''],
       fields: this.fb.array([]),
@@ -48,6 +64,35 @@ export class MainComponent implements OnInit {
     this.addProps();
     this.addMethods();
 
+  }
+
+  show(myC: MyClass){
+    this.s_class = myC.name;
+    if(myC.parent_class == -1){
+      this.s_parent = "have no Parent"
+    }
+    for(let cc of this.classList){
+      if(myC.parent_class == cc.id){
+        this.s_parent = cc.name;
+      }
+    }
+
+    
+    this.provider.getFields(myC.id).then(r2=>{
+       this.s_fields = r2;
+    });
+    this.provider.getMethods(myC.id).then(r3=>{
+      this.s_methods = r3;
+    });
+    this.showed = true;
+  }
+
+  doExtends(){
+    this.provider.doExtends(this.parent, this.child).then(res=>{
+      console.log("Extends is working");
+    });
+    this.updatePage();
+  
   }
   
   addMethods() {
@@ -66,6 +111,7 @@ export class MainComponent implements OnInit {
       myIdentifier: '',
       name: '',
       fieldType: '',
+      defaultValue: '',
     };
     
     this.fields.push(this.fb.group(tmp));
@@ -73,9 +119,16 @@ export class MainComponent implements OnInit {
 
   generate(){
     this.provider.generateCode().then(x=>{
-      console.log("hey")
+      console.log("Your code generated to Java Code")
     })
   }
+
+  makeParent(){
+    this.provider.makeParent(this.parent, this.child).then(r=>{
+      console.log("extends is working");
+    });
+  }
+
 
   save() {
     console.log(this.form.value);
@@ -97,18 +150,19 @@ export class MainComponent implements OnInit {
       this.provider.createMyClass(tmp).then(x => {
         console.log(x);
         
+        this.provider.getListOfClass().then(res=>{
+          this.classList = res;
+        });
       });
+
       
   }
 
 
-  getMyClass(m:MyClass){
-    this.provider.getMyClass(m).then(res => {
-      console.log(res);
 
-      this.myclasses = res;
-    })  
-  }
+  updatePage(): void {
+    window.location.reload();
+}
 
   
   createProject(){

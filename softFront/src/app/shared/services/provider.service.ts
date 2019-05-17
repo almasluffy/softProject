@@ -18,8 +18,12 @@ export class ProviderService extends UmlserviceService{
     return this.get(`http://127.0.0.1:8000/converter/my_projects/`,{});
   }
 
-  getMyClass(project:MyProject):Promise<MyClass[]>{
-    return this.get(`http://127.0.0.1:8000/converter/my_projects/${project.id}/my_classes/`,{});
+  getListOfClass():Promise<MyClass[]>{
+    return this.get(`http://127.0.0.1:8000/converter/my_projects/1/my_classes/`,{});
+  }
+
+  doExtends(p_id: number, c_id: number){
+    return this.get(`http://127.0.0.1:8000/converter/extends/${p_id}/${c_id}/`, {});
   }
 
   // getMyField(project:MyProject,myclass:MyClass):Promise<MyField[]>{
@@ -40,6 +44,13 @@ export class ProviderService extends UmlserviceService{
     });
   }
 
+  getFields(c_id: number): Promise<MyField[]>{
+    return this.get(`http://127.0.0.1:8000/converter/my_classes/${c_id}/fields/`,{});
+  }
+  getMethods(c_id: number): Promise<MyMethod[]>{
+    return this.get(`http://127.0.0.1:8000/converter/my_classes/${c_id}/methods/`,{});
+  }
+
   createMyClass(data:any):Promise<MyClass>{
     return this.post(`http://127.0.0.1:8000/converter/my_projects/create_class/`,data);
   }
@@ -47,6 +58,13 @@ export class ProviderService extends UmlserviceService{
   generateCode(){
     return this.get(`http://127.0.0.1:8000/converter/generate_code/`,{})
   }
+
+  makeParent(p_id: number, c_id: number):Promise<MyClass>{
+    return this.put(`http://127.0.0.1:8000/converter/makeParent/${c_id}/`, {
+      parent_class: p_id
+    });
+  }
+
   // createMyClass(project:MyProject,name:any):Promise<MyClass>{
   //   return this.post(`http://127.0.0.1:8000/converter/my_projects/${project.id}/my_classes/`,{
   //     name:name

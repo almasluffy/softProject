@@ -17,7 +17,9 @@ class MyProject(models.Model):
 class MyClass(models.Model):
     name = models.CharField(max_length=200)
 
-    my_project = models.ForeignKey(MyProject, on_delete=models.CASCADE)
+    parent_class = models.IntegerField(default=-1)
+
+    my_project = models.ForeignKey(MyProject, on_delete=models.CASCADE,blank=True, null=True)
 
     def __str__(self):
         return '{}: {}'.format(self.id, self.name)
@@ -33,6 +35,7 @@ class MyField(models.Model):
     name = models.CharField(max_length=200)
     myIdentifier = models.CharField(max_length=200)
     fieldType = models.CharField(max_length=200)
+    defaultValue = models.CharField(max_length=200)
 
     # my_class = models.ForeignKey(MyClass, on_delete=models.CASCADE)
 

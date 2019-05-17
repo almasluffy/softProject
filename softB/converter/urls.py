@@ -15,5 +15,10 @@ urlpatterns = [
 
      path('my_projects/create_class/', views.create_class),
      path('generate_code/', views.generate_code),
-     path('test/', views.test)
+     path('test/', views.test),
+     path('extends/<int:id1>/<int:id2>/', views.extends),
+     path('makeParent/<int:pk>/', views.makeParent),
+
+     path('my_classes/<int:pk>/fields/', views.getFields),
+     path('my_classes/<int:pk>/methods/', views.getMethods)
 ]

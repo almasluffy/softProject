@@ -12,7 +12,7 @@ class MyProjectSerializer(serializers.ModelSerializer):
 class MyFieldSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyField
-        fields = ('id', 'name', 'myIdentifier', 'fieldType', "my_class")
+        fields = ('id', 'name', 'myIdentifier', 'fieldType', 'defaultValue', "my_class")
 class MyMethodSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyMethod
@@ -27,17 +27,20 @@ class MyInputSerializer(serializers.ModelSerializer):
         fields = ('id', 'inputType', 'my_method')
 
 class MyClassSerializer(serializers.ModelSerializer):
-    fields = MyFieldSerializer(many=True, write_only=True)
-    methods = MyMethodSerializer(many=True, write_only=True)
+    id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField(required=False)
+    fields = MyFieldSerializer(many=True, write_only=True, required=False)
+    methods = MyMethodSerializer(many=True, write_only=True, required=False)
     # inputs = MyInputSerializer(many=True, write_only=True, required=False)
 
     class Meta:
         model = MyClass
-        fields = ('id', 'name', 'my_project', 'fields', 'methods')
+        fields = ('id', 'name', 'my_project', 'fields', 'methods', 'parent_class')
 
     def create(self, validated_data):
         fields = validated_data.pop('fields')
         methods = validated_data.pop('methods')
+        #parent_class = validated_data.pop('parent_class')
         # inputs = validated_data.pop('inputs')
         my_class = MyClass.objects.create(**validated_data)
 

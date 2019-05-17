@@ -8,6 +8,7 @@ export interface MyClass{
     name:string;
     prop:MyField[];
     methods:MyMethod[];
+    parent_class: number;
 }
 
 export interface MyField{
@@ -15,6 +16,7 @@ export interface MyField{
     name:string;
     myIdentifier:string;
     fieldType:string;
+    defaultValue: string;
 }
 
 export interface MyMethod{

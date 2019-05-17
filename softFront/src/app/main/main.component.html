@@ -1,10 +1,35 @@
-<!-- <div class = 'myclass'>
-  <div *ngFor="let c of myclasses" (click) ="getMyClass(c)">{{c.id}} - {{c.name}}</div>
-</div> -->
+<div class = "lside">
+<h3>Project 1</h3>
+<h4>List of classes:</h4>
+<div class = 'myclass'>
+  <div *ngFor="let c of classList">
+    {{c.name}}   <button (click) = "show(c)">Show Detail</button><br>
+  </div>
+</div>
+<ng-container *ngIf="showed">
+    <div class = "hh">
+      {{s_class}}<br> Parent Class: <span style="color: red">{{s_parent}} </span><br>
+     <span style="color: blue"> Fields:</span>
+      <div *ngFor="let sf of s_fields">
+          {{sf.myIdentifier}}  {{sf.name}} {{sf.fieldType}} = {{sf.defaultValue}}
+      </div>
+      <br>
+      <span style="Color: blue">Methods:</span>
+      <div *ngFor="let sm of s_methods">
+          {{sm.methodIdentifier}}  {{sm.name}} {{sm.methodType}}()
+      </div>
+      <br>
+    </div>
+    
+  </ng-container>
+<br>
 <button (click)="generate()">Generate to Java code</button>
+<div>
 <form>
   <div [formGroup]="form" class = "mainForm">
-    
+    <h2>Creating the New Class for <strong style="color: red">Project1</strong></h2>
+    <button (click) = "updatePage()">Create new class</button>
+    <br> <br>
     <div class = "className">
       <input type="text" placeholder="Class name" formControlName="name" id = "classInput">
     </div>
@@ -24,12 +49,15 @@
             
             <select formControlName="fieldType">
               <option [value]="'int'">int</option>
-              <option [value]="'bool'">bool</option>
+              <option [value]="'boolean'">bool</option>
               <option [value]="'String'">string</option>
             </select>
             
             <input type="text" placeholder="Field Name" formControlName="name" id = "fieldInput">
-            <button>-</button><br>
+            <input type="text" placeholder="DefaultValue" formControlName="defaultValue" id="defaultValue">
+
+            
+            
           
           </li>
         </ul>
@@ -52,7 +80,7 @@
               
               <select formControlName="methodType">
                 <option [value]="'int'">int</option>
-                <option [value]="'bool'">bool</option>
+                <option [value]="'boolean'">bool</option>
                 <option [value]="'String'">string</option>
                 <option [value]="'void'">void</option>
               </select>
@@ -65,14 +93,38 @@
       </div>
       
       <button type="button" (click)="addMethods();">Add Method</button> 
-      <button> DeleteLast</button>
+      <!-- <button> DeleteLast</button> -->
     </div>
     <button (click)="save()">Save</button>
-    <a routerLink = "/main"><button>Create new class</button></a>
+    <br><br>
+   
 
     
   </div>
 </form>
+<br><br>
+<div class = "extends">
+    
+    Choose the class which you want to add extends
+    <select required [(ngModel)]="child">
+        <option *ngFor="let c of classList" [value]="c.id">
+            {{c.name}}
+        </option>
+    </select>
+
+    <br><br>
+    Choose his parent class:
+
+    <select required [(ngModel)]="parent">
+        <option *ngFor="let c of classList" [value]="c.id">
+            {{c.name}}
+        </option>
+    </select>
+    
+    <br>
+    <br><button (click) = "makeParent()">Do Extends</button>
+    <br><button (click) = "updatePage()">Save Connection</button>
+    </div>
 
 
 
