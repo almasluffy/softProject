@@ -120,7 +120,7 @@ export class MainComponent implements OnInit {
   generate(){
     this.provider.generateCode().then(x=>{
       console.log("Your code generated to Java Code")
-    })
+    });
   }
 
   makeParent(){

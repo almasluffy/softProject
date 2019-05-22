@@ -1,29 +1,64 @@
+<div class="umlbody">
 <div class = "lside">
-<h3>Project 1</h3>
-<h4>List of classes:</h4>
 <div class = 'myclass'>
+<h3 style="font-family:fantasy; font-style:oblique; color:crimson; font-size:35px;">Project 1</h3>
+<div class=""></div>
+<h4 style="font-family:fantasy; font-style:oblique;">List of classes:</h4>
+
   <div *ngFor="let c of classList">
     {{c.name}}   <button (click) = "show(c)">Show Detail</button><br>
   </div>
+  
+  <div class = "extends">
+    
+    Choose the class which you want to add extends
+    <select required [(ngModel)]="child">
+        <option *ngFor="let c of classList" [value]="c.id">
+            {{c.name}}
+        </option>
+    </select>
+
+    <br><br>
+    Choose his parent class:
+
+    <select required [(ngModel)]="parent">
+        <option *ngFor="let c of classList" [value]="c.id">
+            {{c.name}}
+        </option>
+    </select>
+    
+    <br>
+    <br><button (click) = "makeParent()">Do Extends</button>
+    <br><button (click) = "updatePage()">Save Connection</button>
+    </div>
+    <br>
+<button (click)="generate()">Generate to Java code</button>
+<br>
+<br>
+
 </div>
+ 
+
+
 <ng-container *ngIf="showed">
     <div class = "hh">
       {{s_class}}<br> Parent Class: <span style="color: red">{{s_parent}} </span><br>
      <span style="color: blue"> Fields:</span>
       <div *ngFor="let sf of s_fields">
-          {{sf.myIdentifier}}  {{sf.name}} {{sf.fieldType}} = {{sf.defaultValue}}
+          {{sf.myIdentifier}}  {{sf.fieldType}}  {{sf.name}} = {{sf.defaultValue}}
       </div>
       <br>
       <span style="Color: blue">Methods:</span>
       <div *ngFor="let sm of s_methods">
-          {{sm.methodIdentifier}}  {{sm.name}} {{sm.methodType}}()
+          {{sm.methodIdentifier}}  {{sm.methodType}} {{sm.name}}()
       </div>
       <br>
     </div>
     
   </ng-container>
-<br>
-<button (click)="generate()">Generate to Java code</button>
+
+<div class="blue">
+
 <div>
 <form>
   <div [formGroup]="form" class = "mainForm">
@@ -97,35 +132,16 @@
     </div>
     <button (click)="save()">Save</button>
     <br><br>
-   
+  
 
-    
   </div>
 </form>
+
+</div>
 <br><br>
-<div class = "extends">
-    
-    Choose the class which you want to add extends
-    <select required [(ngModel)]="child">
-        <option *ngFor="let c of classList" [value]="c.id">
-            {{c.name}}
-        </option>
-    </select>
-
-    <br><br>
-    Choose his parent class:
-
-    <select required [(ngModel)]="parent">
-        <option *ngFor="let c of classList" [value]="c.id">
-            {{c.name}}
-        </option>
-    </select>
-    
-    <br>
-    <br><button (click) = "makeParent()">Do Extends</button>
-    <br><button (click) = "updatePage()">Save Connection</button>
-    </div>
 
 
 
 
+
+</div>
