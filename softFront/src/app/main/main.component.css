@@ -3,35 +3,39 @@
      /* background-color: burlywood; */
      background-repeat: no-repeat;
      background-size: 100%;
-     margin: 0px;
+     /* width: 1600px;
+     height: 530px;
+     */
 
 }
 
-.blue{
-     text-align: center;
-     /* border: 3px solid #333;
-     position: absolute;
-     display:flexbox;
-     justify-content: center;
-     
-  */   
-} 
+.btn{
+     background-color: #333;
+     color: aliceblue;
+     font-family: fantasy;
+     size: 12px 6px;
+}
 
 .mainForm{
     width: 370px;
     height: 30%;
-     float: right;
-    margin-top: 10px;
-    margin-right: 500px; 
+    float: center;
+    margin-top: -500px;
+    margin-left: 540px; 
+    text-align: center;
+    color: white;
     
 }
 
 .hh{
      float: right;
-     border: 1px solid red;
+     border: 5px solid #333;
      /* margin-right: 200px; */
      width:200px;
      text-align: center;
+     background-image: linear-gradient(#27261980, rgba(216, 198, 145, 0.589));
+     margin-top: -500px;
+     color: white;
 }
 /* .lside{
      border: 3px solid yellow;
@@ -79,6 +83,7 @@ li{
      width: 300px;
      color: white;
      background-image: linear-gradient(#27261980, rgba(216, 198, 145, 0.589));
+     /* text-align: left; */
 }
 
 .extends{

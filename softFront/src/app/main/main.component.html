@@ -1,12 +1,13 @@
 <div class="umlbody">
 <div class = "lside">
 <div class = 'myclass'>
-<h3 style="font-family:fantasy; font-style:oblique; color:crimson; font-size:35px;">Project 1</h3>
+<h3 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+ color:crimson; font-size:25px; margin-left: 90px;">Project 1</h3>
 <div class=""></div>
-<h4 style="font-family:fantasy; font-style:oblique;">List of classes:</h4>
+<h4 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">List of classes:</h4>
 
-  <div *ngFor="let c of classList">
-    {{c.name}}   <button (click) = "show(c)">Show Detail</button><br>
+  <div *ngFor="let c of classList" style="margin-left: 21px;">
+     {{c.name}} <button class="btn" style="margin-left: 5px;" (click) = "show(c)">Show Detail</button><br>
   </div>
   
   <div class = "extends">
@@ -28,11 +29,11 @@
     </select>
     
     <br>
-    <br><button (click) = "makeParent()">Do Extends</button>
-    <br><button (click) = "updatePage()">Save Connection</button>
+    <br><button class="btn" (click) = "makeParent()">Do Extends</button>
+    <br><button class="btn" (click) = "updatePage()">Save Connection</button>
     </div>
     <br>
-<button (click)="generate()">Generate to Java code</button>
+<button class="btn" style="margin-left: 21px; background-color: crimson" (click)="generate()">Generate to Java code</button>
 <br>
 <br>
 
@@ -43,12 +44,12 @@
 <ng-container *ngIf="showed">
     <div class = "hh">
       {{s_class}}<br> Parent Class: <span style="color: red">{{s_parent}} </span><br>
-     <span style="color: blue"> Fields:</span>
+     <span style="color: rgb(221, 156, 34)"> Fields:</span>
       <div *ngFor="let sf of s_fields">
           {{sf.myIdentifier}}  {{sf.fieldType}}  {{sf.name}} = {{sf.defaultValue}}
       </div>
       <br>
-      <span style="Color: blue">Methods:</span>
+      <span style="color: rgb(224, 194, 20)">Methods:</span>
       <div *ngFor="let sm of s_methods">
           {{sm.methodIdentifier}}  {{sm.methodType}} {{sm.name}}()
       </div>
@@ -57,13 +58,12 @@
     
   </ng-container>
 
-<div class="blue">
-
 <div>
 <form>
   <div [formGroup]="form" class = "mainForm">
-    <h2>Creating the New Class for <strong style="color: red">Project1</strong></h2>
-    <button (click) = "updatePage()">Create new class</button>
+    <h2>Creating the New Class for <strong style="color: crimson;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Project1</strong></h2>
+    <button class="btn" (click) = "updatePage()">Create new class</button>
     <br> <br>
     <div class = "className">
       <input type="text" placeholder="Class name" formControlName="name" id = "classInput">
@@ -90,15 +90,12 @@
             
             <input type="text" placeholder="Field Name" formControlName="name" id = "fieldInput">
             <input type="text" placeholder="DefaultValue" formControlName="defaultValue" id="defaultValue">
-
-            
-            
           
           </li>
         </ul>
       </div>
       
-      <button type="button" (click)="addProps()">Add Field</button>
+      <button class="btn" type="button" (click)="addProps()">Add Field</button>
     </div>
 
     <div class = "classMethods" formArrayName="methods">
@@ -127,17 +124,18 @@
         </ul>
       </div>
       
-      <button type="button" (click)="addMethods();">Add Method</button> 
+      <button class="btn" type="button" (click)="addMethods();">Add Method</button> 
       <!-- <button> DeleteLast</button> -->
     </div>
-    <button (click)="save()">Save</button>
     <br><br>
+    <button class="btn" style="width: 100px; height: 30px; background-color: crimson" (click)="save()">Save</button>
+    <br>
   
 
   </div>
 </form>
 
-</div>
+
 <br><br>
 
 
