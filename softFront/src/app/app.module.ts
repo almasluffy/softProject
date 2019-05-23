@@ -9,6 +9,8 @@ import { ProviderService } from './shared/services/provider.service';
 import {ReactiveFormsModule,FormsModule} from '@angular/forms';
 import { NewclassFormComponent } from './newclass-form/newclass-form.component';
 import { HeaderComponent } from './header/header.component';
+import { AboutComponent } from './about/about.component';
+import { ViewsComponent } from './views/views.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { HeaderComponent } from './header/header.component';
     MainComponent,
     NewclassFormComponent,
     HeaderComponent,
+    AboutComponent,
+    ViewsComponent,
   ],
   imports: [
     BrowserModule,

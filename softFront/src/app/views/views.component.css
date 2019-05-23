@@ -1,0 +1,9 @@
+.umlbody{
+    background-image: url(src\assets\images\gory.jpg); 
+    /* background-color: burlywood; */
+    background-repeat: no-repeat;
+    /* background-size: 100%; */
+    width: 1700px;
+    height: 530px;
+
+}
